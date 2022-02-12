@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Document</title>
 </head>
@@ -12,12 +13,28 @@
         <img src="./assets/img/septomeme.png">
     </header>
     <main>
-        <div id="chactacter_card">
-            <div id="the_IMG"></div>
-            <h1 id="the_title"></h1>
-            <h1 id="the_description"></h1>
+        <div id="chactacter_card" class="columns">
+            <div class="column is-one-quarter"></div>
+            <div class="column row">
+                <div id="the_IMG" class='image is-1by1 column is-full row is-full' style='margin:30px 30px 0px 30px'></div>
+            </div>
+            <div class="column is-one-quarter"></div>
+            
         </div>
-        <div id="the_buttons"></div>
+        <div id="chactacter_card" class="columns">
+            <div class="column is-one-quarter"></div>
+            <div class="column row">
+                <h1 id="the_title" class='column is-full row is-full'></h1>
+                <h1 id="the_description" class='column is-full row is-full'></h1>
+            </div>
+            <div class="column is-one-quarter"></div>
+        </div>
+        
+        <div class="columns">
+            <div class="column is-one-quarter"></div>
+            <div id="the_buttons" class="column" style='margin:30px'></div>
+            <div class="column is-one-quarter"></div>
+        </div>
     </main>
     <footer>
 
