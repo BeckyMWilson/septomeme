@@ -174,7 +174,7 @@ var dnd = function() {
 // This function handles the 'Draw New Card' button.
 var refresh = function() {
     var refreshButton = document.createElement("div");
-    refreshButton.innerHTML = "<button onclick= whichAnimal()>Draw New Card</button>";
+    refreshButton.innerHTML = "<button class='button is-primary is-responsive is-medium is-fullwidth' onclick= whichAnimal()>Draw New Card</button>";
     theButtons.appendChild(refreshButton);
 };
 
