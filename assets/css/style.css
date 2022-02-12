@@ -1,0 +1,12 @@
+body {
+    background-color: black;
+}
+
+.card {
+    background-color: lightslategray;
+    color: white;
+}
+
+.card h1 {
+    color: white;
+}
