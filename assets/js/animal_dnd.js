@@ -49,7 +49,7 @@ var cat_function = function() {
 
     var display_cat = function(data_cat) {
         var randomCat = data_cat[0].url;
-        theIMG.innerHTML = "<img src=" + randomCat + ">";
+        theIMG.innerHTML = "<img class='image is-270x180' src=" + randomCat + ">";
 
         dnd();
     };
@@ -74,7 +74,7 @@ var dog_function = function() {
         });
     var display_dog = function(data_dog) {
         var randomDog = data_dog.message;
-        theIMG.innerHTML = "<img src=" + randomDog + ">";
+        theIMG.innerHTML = "<img class='image is-270x180' src=" + randomDog + ">";
 
         dnd();
     }
@@ -174,7 +174,7 @@ var dnd = function() {
 // This function handles the 'Draw New Card' button.
 var refresh = function() {
     var refreshButton = document.createElement("div");
-    refreshButton.innerHTML = "<button class='button is-primary is-responsive is-medium is-fullwidth' onclick= whichAnimal()>Draw New Card</button>";
+    refreshButton.innerHTML = "<button class='button is-dark is-responsive is-medium is-fullwidth' onclick= whichAnimal()>Draw New Card</button>";
     theButtons.appendChild(refreshButton);
 };
 
