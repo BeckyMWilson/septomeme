@@ -6,6 +6,8 @@ var theTitle = document.querySelector("#the_title");
 var theDescription = document.querySelector("#the_description");
 var theButtons = document.querySelector("#the_buttons");
 
+var galleryArray = [];
+
 
 // Random number generator.
 // 'max' parameter accepts any value passed by the user.
@@ -171,6 +173,19 @@ var dnd = function() {
     };
 };
 
+// The following gallery() function aggregates the picture, ability title, and ability description into a variable
+// called store_card. The store_card variable then pushes the recently stored card into an array. 
+var gallery = function() {
+    var store_picture = theIMG.innerHTML;
+    var store_title = theTitle.innerHTML;
+    var store_description = theDescription.innerHTML
+
+    var store_card = {picture: store_picture, title: store_title, description: store_description};
+    console.log(store_card);
+    galleryArray.push(store_card);
+    console.log(galleryArray);
+}
+
 // This function handles the 'Draw New Card' button.
 var refresh = function() {
     var refreshButton = document.createElement("div");
@@ -178,5 +193,13 @@ var refresh = function() {
     theButtons.appendChild(refreshButton);
 };
 
+// This function handles the 'Save Card' Button and calls gallery()
+var save = function() {
+    var saveButton = document.createElement("div");
+    saveButton.innerHTML = "<button class='button is-dark is-responsive is-medium is-fullwidth' onclick=gallery()>Save Card</button>";
+    theButtons.appendChild(saveButton);
+};
+
 refresh();
+save();
 whichAnimal();
