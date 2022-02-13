@@ -204,7 +204,7 @@ var save = function() {
 var imageStore = function() {
     for (var i = 0; i < galleryArray.length; i++) {
         
-        localStorage.setItem("Images", JSON.stringify(galleryArray[i]));
+        localStorage.setItem("Images", JSON.stringify(galleryArray));
         
     }
 }
