@@ -1,6 +1,6 @@
 // Variables that target different HTML elements
 var theBody = document.querySelector("#the_body");
-var theCharacter = document.querySelector("#charcter_card");
+var theCharacter = document.querySelector("#character_card");
 var theIMG = document.querySelector("#the_IMG");
 var theTitle = document.querySelector("#the_title");
 var theDescription = document.querySelector("#the_description");
@@ -184,6 +184,7 @@ var gallery = function() {
     console.log(store_card);
     galleryArray.push(store_card);
     console.log(galleryArray);
+    imageStore();
 }
 
 // This function handles the 'Draw New Card' button.
@@ -199,6 +200,14 @@ var save = function() {
     saveButton.innerHTML = "<button class='button is-dark is-responsive is-medium is-fullwidth' onclick=gallery()>Save Card</button>";
     theButtons.appendChild(saveButton);
 };
+
+var imageStore = function() {
+    for (var i = 0; i < galleryArray.length; i++) {
+        
+        localStorage.setItem("Images", JSON.stringify(galleryArray));
+        
+    }
+}
 
 refresh();
 save();
