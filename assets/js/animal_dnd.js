@@ -7,6 +7,8 @@ var theDescription = document.querySelector("#the_description");
 var theButtons = document.querySelector("#the_buttons");
 
 var galleryArray = [];
+var galleryArrayData = localStorage.getItem("Images");
+var imageHist = JSON.parse(galleryArrayData);
 
 
 // Random number generator.
@@ -18,7 +20,7 @@ var getRandomInt = function(max) {
 // Randomly select and animal.
 var whichAnimal = function () {
     var randomNumber = getRandomInt(9);
-    console.log(randomNumber);
+    // console.log(randomNumber);
 
     if (randomNumber >= 0 && randomNumber < 3 ) {
         cat_function();
@@ -36,7 +38,7 @@ var cat_function = function() {
         .then(function(response) {
             if (response.ok) {
                 response.json().then(function(data) {
-                    console.log(data);
+                    // console.log(data);
                     display_cat(data);
                     
                 });
@@ -64,7 +66,7 @@ var dog_function = function() {
         .then(function(response) {
             if (response.ok) {
                 response.json().then(function(data) {
-                    console.log(data);
+                    // console.log(data);
                     display_dog(data);   
                 });
             } else {
@@ -89,7 +91,7 @@ var fox_function = function() {
         .then(function(response) {
             if (response.ok) {
                 response.json().then(function(data) {
-                    console.log(data);
+                    // console.log(data);
                     display_fox(data);        
                 });
             } else {
@@ -116,7 +118,7 @@ var dnd = function() {
             .then(function(response) {
                 if (response.ok) {
                     response.json().then(function(data) {
-                        console.log(data);
+                        // console.log(data);
                         choose_character(data);    
                     });
                 } else {
@@ -132,14 +134,14 @@ var dnd = function() {
     // Then it takes that data and passes it through the choose_special_ability() function as a parameter.  
     var choose_character = function(data_dnd) {
         var randomNumber = getRandomInt(data_dnd.results.length);
-        console.log("Random ID #:" + randomNumber);
+        // console.log("Random ID #:" + randomNumber);
         var character = data_dnd.results[randomNumber].url;
             var newAPIUrl = "https://www.dnd5eapi.co" + character;
             fetch(newAPIUrl)
                 .then(function(response) {
                     if (response.ok) {
                         response.json().then(function(data) {
-                            console.log(data);
+                            // console.log(data);
                             choose_special_ability(data);      
                         });
                     } else {
@@ -176,15 +178,20 @@ var dnd = function() {
 // The following gallery() function aggregates the picture, ability title, and ability description into a variable
 // called store_card. The store_card variable then pushes the recently stored card into an array. 
 var gallery = function() {
+    if (imageHist) {
+        for (var i = 0; i < imageHist.length; i++) {
+            galleryArray.push(imageHist[i]);
+        }
+    }
+
     var store_picture = theIMG.innerHTML;
     var store_title = theTitle.innerHTML;
     var store_description = theDescription.innerHTML
-
     var store_card = {picture: store_picture, title: store_title, description: store_description};
-    console.log(store_card);
+
     galleryArray.push(store_card);
-    console.log(galleryArray);
-    imageStore();
+    localStorage.setItem("Images", JSON.stringify(galleryArray));
+    // imageStore();
 }
 
 // This function handles the 'Draw New Card' button.
@@ -196,18 +203,18 @@ var refresh = function() {
 
 // This function handles the 'Save Card' Button and calls gallery()
 var save = function() {
+    console.log(imageHist);
     var saveButton = document.createElement("div");
     saveButton.innerHTML = "<button class='button is-dark is-responsive is-medium is-fullwidth' onclick=gallery()>Save Card</button>";
     theButtons.appendChild(saveButton);
 };
 
-var imageStore = function() {
-    for (var i = 0; i < galleryArray.length; i++) {
-        
-        localStorage.setItem("Images", JSON.stringify(galleryArray));
-        
-    }
-}
+
+
+// var imageStore = function() {
+//     galleryArrayData = localStorage.getItem("Images");
+//     imageHist = JSON.parse(galleryArrayData);
+// }
 
 refresh();
 save();
