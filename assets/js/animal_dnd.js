@@ -182,6 +182,7 @@ var gallery = function() {
         for (var i = 0; i < imageHist.length; i++) {
             galleryArray.push(imageHist[i]);
         }
+        imageHist = [];
     }
 
     var store_picture = theIMG.innerHTML;
