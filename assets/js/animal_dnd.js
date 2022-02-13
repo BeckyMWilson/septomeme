@@ -1,6 +1,6 @@
 // Variables that target different HTML elements
 var theBody = document.querySelector("#the_body");
-var theCharacter = document.querySelector("#charcter_card");
+var theCharacter = document.querySelector("#character_card");
 var theIMG = document.querySelector("#the_IMG");
 var theTitle = document.querySelector("#the_title");
 var theDescription = document.querySelector("#the_description");
