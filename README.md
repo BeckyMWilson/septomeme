@@ -7,7 +7,7 @@
 - John Martin - https://github.com/gemsjohn
 
 ### Table of Contents
-[Summary] (#Summary)
+[Summary] (https://github.com/BeckyMWilson/septomeme/tree/Becky#summary)
 
 ### Summary
 Septomeme is a play on "Magic the Gathering". We randomly generate animal images with three (3) different APIs. Also, randomly generate card text by pulling from a "Dungeons & Dragons" API. Combining all generated content to create a Septomeme card. The user can draw a new card and/or save card to their gallery.
