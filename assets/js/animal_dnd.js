@@ -10,7 +10,6 @@ var galleryArray = [];
 var galleryArrayData = localStorage.getItem("Images");
 var imageHist = JSON.parse(galleryArrayData);
 
-
 // Random number generator.
 // 'max' parameter accepts any value passed by the user.
 var getRandomInt = function(max) {
@@ -182,16 +181,61 @@ var gallery = function() {
         for (var i = 0; i < imageHist.length; i++) {
             galleryArray.push(imageHist[i]);
         }
+        imageHist = [];
     }
 
     var store_picture = theIMG.innerHTML;
     var store_title = theTitle.innerHTML;
     var store_description = theDescription.innerHTML
     var store_card = {picture: store_picture, title: store_title, description: store_description};
+    
+    function openModal($el) {
+        $el.classList.add('is-active');
+    }
 
-    galleryArray.push(store_card);
-    localStorage.setItem("Images", JSON.stringify(galleryArray));
-    // imageStore();
+    function closeModal($el) {
+        $el.classList.remove('is-active');
+    }
+
+    function closeAllModals() {
+        (document.querySelectorAll('.modal') || []).forEach(($modal) => {
+            closeModal($modal);
+        });
+    }
+    (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
+        const modal = $trigger.dataset.target;
+        const $target = document.getElementById(modal);
+        openModal($target);
+
+        var yes_button = document.querySelector("#yes_button");
+        var no_button = document.querySelector("#no_button");
+        
+        yes_button.addEventListener ('click', function() {
+            galleryArray.push(store_card);
+            var uniqueGalleryArray = [...new Set(galleryArray)];  // this solves a bug caused by forEach where entries multiple based on the amount of times 'yes' is selected
+            localStorage.setItem("Images", JSON.stringify(uniqueGalleryArray));
+            closeModal($target);
+        });
+        no_button.addEventListener ('click', function() {
+            // ****** BUG ****** 
+            closeModal($target);
+        });
+    });
+    (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
+        const $target = $close.closest('.modal');
+        // ****** BUG ****** 
+        $close.addEventListener('click', () => {
+            closeModal($target);
+        });
+    });
+    document.addEventListener('keydown', (event) => {
+        const e = event || window.event;
+    
+        if (e.keyCode === 27) { // Escape key
+            // ****** BUG ****** 
+            closeAllModals();
+        }
+    });
 }
 
 // This function handles the 'Draw New Card' button.
@@ -205,10 +249,9 @@ var refresh = function() {
 var save = function() {
     console.log(imageHist);
     var saveButton = document.createElement("div");
-    saveButton.innerHTML = "<button class='button is-dark is-responsive is-medium is-fullwidth' onclick=gallery()>Save Card</button>";
+    saveButton.innerHTML = "<button class='js-modal-trigger button is-dark is-responsive is-medium is-fullwidth' data-target='modal-save-card' onclick=gallery()>Save Card</button>";
     theButtons.appendChild(saveButton);
 };
-
 
 
 // var imageStore = function() {
