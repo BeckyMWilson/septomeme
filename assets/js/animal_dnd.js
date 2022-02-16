@@ -52,7 +52,7 @@ var cat_function = function() {
 
     var display_cat = function(data_cat) {
         var randomCat = data_cat[0].url;
-        theIMG.innerHTML = "<img class='image is-270x180' src=" + randomCat + ">";
+        theIMG.innerHTML = "<img class='image is-270x180' alt='random image of a cat' src=" + randomCat + ">";
 
         dnd();
     };
@@ -77,7 +77,7 @@ var dog_function = function() {
         });
     var display_dog = function(data_dog) {
         var randomDog = data_dog.message;
-        theIMG.innerHTML = "<img class='image is-270x180' src=" + randomDog + ">";
+        theIMG.innerHTML = "<img class='image is-270x180' alt='random image of a dog' src=" + randomDog + ">";
 
         dnd();
     }
@@ -104,7 +104,7 @@ var fox_function = function() {
 
     var display_fox = function(data_fox) {
         var randomFox = data_fox.image;
-        theIMG.innerHTML = "<img src=" + randomFox + ">";
+        theIMG.innerHTML = "<img alt='random image of a fox' src=" + randomFox + ">";
 
         dnd();
     };
