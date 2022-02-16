@@ -43,8 +43,9 @@ Septomeme is a play on "Magic the Gathering". We randomly generate animal images
    <li>
     Bulma
    </li>
+   <sp>
 
- <b>Development Tools:</b>
+<b>Development Tools:</b>
  <ul>
    <li>
     Chrome Developer Tools (DevTools)
