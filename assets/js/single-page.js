@@ -22,10 +22,13 @@ galleryArray = [];
 
 console.log(galleryImg);
 
-
-
-
 var gallery = function() {
+        for (var i = 0; i < galleryImg.length; i++) {
+                if (galleryImg.length > 6) {
+                        console.log("!!!");
+                        galleryImg.shift();
+                }
+        }
         
         theIMG_1.innerHTML = galleryImg[0].picture;
         theTitle_1.innerHTML = galleryImg[0].title;
@@ -51,6 +54,7 @@ var gallery = function() {
         theTitle_6.innerHTML = galleryImg[5].title;
         theDescription_6.innerHTML = galleryImg[5].description;
 
-}
+        
+};
+
 gallery();
-console.log(galleryArray)

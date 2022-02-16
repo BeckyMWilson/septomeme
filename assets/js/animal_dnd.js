@@ -214,6 +214,7 @@ var gallery = function() {
             galleryArray.push(store_card);
             var uniqueGalleryArray = [...new Set(galleryArray)];  // this solves a bug caused by forEach where entries multiple based on the amount of times 'yes' is selected
             localStorage.setItem("Images", JSON.stringify(uniqueGalleryArray));
+            whichAnimal();
             closeModal($target);
         });
         no_button.addEventListener ('click', function() {
@@ -253,12 +254,7 @@ var save = function() {
     theButtons.appendChild(saveButton);
 };
 
-
-// var imageStore = function() {
-//     galleryArrayData = localStorage.getItem("Images");
-//     imageHist = JSON.parse(galleryArrayData);
-// }
-
 refresh();
 save();
 whichAnimal();
+
