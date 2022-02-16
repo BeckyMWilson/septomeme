@@ -41,3 +41,13 @@ header nav button a:hover {
 .button {
     font-family: 'Staatliches', cursive;
 }
+#the_buttons {
+    display: flex;
+    justify-content: center;
+    
+}
+
+.buttonStyle {
+    width: 50%;
+    opacity: 85%;
+}
