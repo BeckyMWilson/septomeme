@@ -212,6 +212,12 @@ var gallery = function() {
         
         yes_button.addEventListener ('click', function() {
             galleryArray.push(store_card);
+            for (var i = 0; i < galleryArray.length; i++) {
+                if (galleryArray.length > 6) {
+                        console.log("!!!");
+                        galleryArray.shift();
+                }
+        }
             var uniqueGalleryArray = [...new Set(galleryArray)];  // this solves a bug caused by forEach where entries multiple based on the amount of times 'yes' is selected
             localStorage.setItem("Images", JSON.stringify(uniqueGalleryArray));
             whichAnimal();
@@ -242,6 +248,7 @@ var gallery = function() {
 // This function handles the 'Draw New Card' button.
 var refresh = function() {
     var refreshButton = document.createElement("div");
+    refreshButton.className = "buttonStyle";
     refreshButton.innerHTML = "<button class='button is-dark is-responsive is-medium is-fullwidth' onclick= whichAnimal()>Draw New Card</button>";
     theButtons.appendChild(refreshButton);
 };
@@ -250,6 +257,7 @@ var refresh = function() {
 var save = function() {
     console.log(imageHist);
     var saveButton = document.createElement("div");
+    saveButton.className = "buttonStyle";
     saveButton.innerHTML = "<button class='js-modal-trigger button is-dark is-responsive is-medium is-fullwidth' data-target='modal-save-card' onclick=gallery()>Save Card</button>";
     theButtons.appendChild(saveButton);
 };
