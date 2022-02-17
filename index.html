@@ -15,7 +15,7 @@
     <header class="columns">
         <nav class="navbar column nav" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
-                <img style="height: 80px; width: 240px;" src="./assets/img/septomeme.png">
+                <img style="height: 80px; width: 240px;" alt="A red X through the octocat followed by Septomeme" src="./assets/img/septomeme.png">
                 <button class="button is-dark is-responsive is-medium navbar-end btn">
                     <a href="./gallery.html">Gallery</a>
                 </button>
@@ -23,12 +23,12 @@
         </nav>
     </header>
     <main>
-        <div class="columns">
+        <section class="columns">
             <div class="column is-one-third"></div>
-            <div class="card column is-one-third">
+            <figure class="card column is-one-third">
                 <div id="character_card" class="columns">
                     <div class="card-image column row">
-                        <figure id="the_IMG" class="image is-3by2" style="margin:30px 30px 0px 30px"></figure>
+                        <picture id="the_IMG" class="image is-3by2" style="margin:30px 30px 0px 30px"></picture>
                     </div>
                 </div>
     
@@ -39,14 +39,17 @@
                     </div>
                 </div>
                 
-                <div class="columns is-centered">
-                    <div id="the_buttons" class="column" style="margin:30px"></div>
-                </div>
-            </div>
-        </div>
+                <footer class="card-footer" id="the_buttons"></footer>
+            </figure>
+        </section>
     </main>
     <footer>
-
+        <p>
+            &copy; Septomeme, Inc.
+        </p>
+        <p>
+            All rights not reserved because this is not a real company.
+        </p>
     </footer>
     <div id="modal-save-card" class="modal">
         <div class="modal-background"></div>

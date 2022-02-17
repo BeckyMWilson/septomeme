@@ -21,10 +21,11 @@ header nav button a:hover {
 
 .card {
     background-color: rgb(65, 65, 65);
-    background-image: linear-gradient(0deg, rgb(25, 25, 25), rgb(100, 100, 100));
+    background:url(../img/cardtemp.jpg) content-box center;
     color: white;
     height: 100%;
     box-shadow: 25px 10px 75px rgb(0, 0, 0);
+    margin-bottom: 3rem;
 }
 
 .card h1 {
@@ -40,5 +41,22 @@ header nav button a:hover {
 
 .button {
     font-family: 'Staatliches', cursive;
-    text-shadow: 1px 1.75px #000000;
+}
+#the_buttons {
+    display: flex;
+    justify-content: center;
+    
+}
+
+.buttonStyle {
+    width: 50%;
+    opacity: 85%;
+}
+
+footer p {
+    color: white;
+    text-align: right;
+    padding-bottom: 5px;
+    padding-right: 5px;
+    font-family: 'Staatliches', cursive;
 }
