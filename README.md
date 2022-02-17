@@ -21,6 +21,12 @@
  <li>
   <a href="#future-development">Future Development</a>
  </li>
+ <li>
+  <a href="#links">Links
+  </li>
+ <li>
+  <a href="#screenshots">Screenshots</a>
+ </li>
 </ul>
 
 ### <h2><b>Bug Squash Gang Collaborators</b></h2>
@@ -128,13 +134,20 @@ Septomeme is a play on trading card games. We randomly generate animal images wi
  <li>
    Debug - forEach issues. User can open and close modal consecutively that causes multiple appends to the array.
  </li>
+</ul>
 
+### <h2><b>Links</b></h2>
+<ul>
+ <li>
+   <h3>Deployed at:</h3>
 
-### <h2><b>Deployed at:</b></h2>
-https://beckymwilson.github.io/septomeme/
+   https://beckymwilson.github.io/septomeme/
+ </li>
+ <li>
+   <h3>GitHub URL:</h3>
 
+   https://github.com/BeckyMWilson/septomeme.git
+ </li>
+</ul>
 
-## GitHub URL:
-https://github.com/BeckyMWilson/septomeme.git
-
-## Screenshot:
+### <h2><b>Screenshots</b></h2>
