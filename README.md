@@ -152,6 +152,11 @@ Septomeme is a play on trading card games. We randomly generate animal images wi
 
 ### <h2><b>Screenshots</b></h2>
 
-![Kanban Page](https://github.com/BeckyMWilson/septomeme/blob/main/assets/img/Kanban%20Board.png)
+![Homepage](https://github.com/BeckyMWilson/septomeme/blob/main/assets/img/Homepage.png)
+
+![Gallery](https://github.com/BeckyMWilson/septomeme/blob/main/assets/img/Gallery.png)
 
 ![Accessibility Score](https://github.com/BeckyMWilson/septomeme/blob/main/assets/img/Accessibility%20Score.png)
+
+![Kanban Page](https://github.com/BeckyMWilson/septomeme/blob/main/assets/img/Kanban%20Board.png)
+
