@@ -1,4 +1,4 @@
-# septomeme
+# <b>septomeme</b>
 
 
 <h1><b>Table of Contents</b></h1>
@@ -30,7 +30,7 @@
 - John Martin - https://github.com/gemsjohn
 
 ### <h2><b>Summary</b></h2>
-Septomeme is a play on "Magic the Gathering". We randomly generate animal images with three (3) different APIs. Also, randomly generate card text by pulling from a "Dungeons & Dragons" API. Combining all generated content to create a Septomeme card. The user can draw a new card and/or save card to their gallery.
+Septomeme is a play on trading card games. We randomly generate animal images with three (3) different APIs. Also, randomly generate card text by pulling from a "Dungeons & Dragons" API. Combining all generated content to create a Septomeme card. The user can draw a new card and/or save card to their gallery.
 
 ### <h2><b>Technologies</b></h2>
 
@@ -125,4 +125,16 @@ Septomeme is a play on "Magic the Gathering". We randomly generate animal images
  <li>
     Ability to delete images on gallery page.
  </li>
+ <li>
+   Debug - forEach issues. User can open and close modal consecutively that causes multiple appends to the array.
+ </li>
 
+
+### <h2><b>Deployed at:</b></h2>
+https://beckymwilson.github.io/septomeme/
+
+
+## GitHub URL:
+https://github.com/BeckyMWilson/septomeme.git
+
+## Screenshot:
