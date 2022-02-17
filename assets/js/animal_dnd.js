@@ -213,7 +213,7 @@ var gallery = function() {
         yes_button.addEventListener ('click', function() {
             galleryArray.push(store_card);
             for (var i = 0; i < galleryArray.length; i++) {
-                if (galleryArray.length > 6) {
+                if (galleryArray.length > 7) {
                         console.log("!!!");
                         galleryArray.shift();
                 }
