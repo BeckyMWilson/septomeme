@@ -1,4 +1,5 @@
 // Variables that target different HTML elements
+// Variables that target different HTML elements
 var theBody = document.querySelector("#the_body");
 var theCharacter = document.querySelector("#character_card");
 var theIMG = document.querySelector("#the_IMG");
@@ -6,9 +7,14 @@ var theTitle = document.querySelector("#the_title");
 var theDescription = document.querySelector("#the_description");
 var theButtons = document.querySelector("#the_buttons");
 
+var yes_button = document.querySelector("#yes_button");
+var no_button = document.querySelector("#no_button");
+
 var galleryArray = [];
 var galleryArrayData = localStorage.getItem("Images");
 var imageHist = JSON.parse(galleryArrayData);
+
+var $target;  //<----moved this here to store the currently focused modal
 
 // Random number generator.
 // 'max' parameter accepts any value passed by the user.
@@ -174,6 +180,21 @@ var dnd = function() {
     };
 };
 
+// Global functions used to handle the Modal functionality
+function openModal($el) {
+    $el.classList.add('is-active');
+}
+
+function closeModal($el) {
+    $el.classList.remove('is-active');
+}
+
+function closeAllModals() {
+    (document.querySelectorAll('.modal') || []).forEach(($modal) => {
+        closeModal($modal);
+    });
+}
+
 // The following gallery() function aggregates the picture, ability title, and ability description into a variable
 // called store_card. The store_card variable then pushes the recently stored card into an array. 
 var gallery = function() {
@@ -187,63 +208,53 @@ var gallery = function() {
     var store_picture = theIMG.innerHTML;
     var store_title = theTitle.innerHTML;
     var store_description = theDescription.innerHTML
-    var store_card = {picture: store_picture, title: store_title, description: store_description};
-    
-    function openModal($el) {
-        $el.classList.add('is-active');
-    }
+    store_card = {picture: store_picture, title: store_title, description: store_description};
 
-    function closeModal($el) {
-        $el.classList.remove('is-active');
-    }
-
-    function closeAllModals() {
-        (document.querySelectorAll('.modal') || []).forEach(($modal) => {
-            closeModal($modal);
-        });
-    }
     (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
         const modal = $trigger.dataset.target;
         const $target = document.getElementById(modal);
         openModal($target);
-
-        var yes_button = document.querySelector("#yes_button");
-        var no_button = document.querySelector("#no_button");
+    
+        var old_yes_button = document.querySelector("#yes_button");
+        var copy_yes_button = old_yes_button.cloneNode(true);
+        old_yes_button.parentNode.replaceChild(copy_yes_button, old_yes_button);
         
-        yes_button.addEventListener ('click', function() {
+        var old_no_button = document.querySelector("#no_button");
+        var copy_no_button = old_no_button.cloneNode(true);
+        old_no_button.parentNode.replaceChild(copy_no_button, old_no_button);
+    
+        var yesClickHandler = function() {
             galleryArray.push(store_card);
             for (var i = 0; i < galleryArray.length; i++) {
                 if (galleryArray.length > 7) {
-                        console.log("!!!");
                         galleryArray.shift();
                 }
-        }
+            }
             var uniqueGalleryArray = [...new Set(galleryArray)];  // this solves a bug caused by forEach where entries multiple based on the amount of times 'yes' is selected
             localStorage.setItem("Images", JSON.stringify(uniqueGalleryArray));
             whichAnimal();
             closeModal($target);
-        });
-        no_button.addEventListener ('click', function() {
-            // ****** BUG ****** 
-            closeModal($target);
-        });
-    });
-    (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
-        const $target = $close.closest('.modal');
-        // ****** BUG ****** 
-        $close.addEventListener('click', () => {
-            closeModal($target);
-        });
-    });
-    document.addEventListener('keydown', (event) => {
-        const e = event || window.event;
-    
-        if (e.keyCode === 27) { // Escape key
-            // ****** BUG ****** 
-            closeAllModals();
         }
+        copy_yes_button.addEventListener ('click', yesClickHandler);
+        copy_no_button.addEventListener ('click', function() {
+            closeModal($target);
+        });
+        (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
+            const $target = $close.closest('.modal');
+            $close.addEventListener('click', () => {
+                closeModal($target);
+            });
+        }); 
+        document.addEventListener('keydown', (event) => {
+            const e = event || window.event;
+        
+            if (e.keyCode === 27) { // Escape key
+                closeAllModals();
+            }
+        });
     });
-}
+
+};
 
 // This function handles the 'Draw New Card' button.
 var refresh = function() {
@@ -264,5 +275,5 @@ var save = function() {
 
 refresh();
 save();
-whichAnimal();
+whichAnimal();            
 
