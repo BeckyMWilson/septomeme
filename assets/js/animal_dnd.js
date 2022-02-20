@@ -209,58 +209,52 @@ var gallery = function() {
     var store_title = theTitle.innerHTML;
     var store_description = theDescription.innerHTML
     store_card = {picture: store_picture, title: store_title, description: store_description};
-}
 
-// Handle the event listener for a dynamically created modal 
-// Keeping this outside the gallery() function prevents the event listeners from stacking
-document.body.addEventListener('click', function(e){
-    if (e.target.classList.contains('js-modal-trigger')) {
-        var $trigger = e.target;
+    (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
         const modal = $trigger.dataset.target;
-        $target = document.getElementById(modal);
+        const $target = document.getElementById(modal);
         openModal($target);
-    }
-})
-
-// When the user selects 'Yes' on the modal, push the store_card into galleryArray
-// and set to local storage
-var handleModalClickYes = function() {
-    galleryArray.push(store_card);
-    for (var i = 0; i < galleryArray.length; i++) {
-        if (galleryArray.length > 7) {
-                galleryArray.shift();
+    
+        var old_yes_button = document.querySelector("#yes_button");
+        var copy_yes_button = old_yes_button.cloneNode(true);
+        old_yes_button.parentNode.replaceChild(copy_yes_button, old_yes_button);
+        
+        var old_no_button = document.querySelector("#no_button");
+        var copy_no_button = old_no_button.cloneNode(true);
+        old_no_button.parentNode.replaceChild(copy_no_button, old_no_button);
+    
+        var yesClickHandler = function() {
+            galleryArray.push(store_card);
+            for (var i = 0; i < galleryArray.length; i++) {
+                if (galleryArray.length > 7) {
+                        galleryArray.shift();
+                }
+            }
+            var uniqueGalleryArray = [...new Set(galleryArray)];  // this solves a bug caused by forEach where entries multiple based on the amount of times 'yes' is selected
+            localStorage.setItem("Images", JSON.stringify(uniqueGalleryArray));
+            whichAnimal();
+            closeModal($target);
         }
-    }
-    var uniqueGalleryArray = [...new Set(galleryArray)];  // this solves a bug caused by forEach where entries multiple based on the amount of times 'yes' is selected
-    localStorage.setItem("Images", JSON.stringify(uniqueGalleryArray));
-    whichAnimal();
-    closeModal($target);
-}
-
-// Looks for the Yes/No query selectors and dictates the function to use based
-// on the user selection
-yes_button.addEventListener ('click', handleModalClickYes);
-no_button.addEventListener ('click', function() {
-    // ****** BUG ****** 
-    closeModal($target);
-});
-
-
-(document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
-    const $target = $close.closest('.modal');
-    // ****** BUG ****** 
-    $close.addEventListener('click', () => {
-        closeModal($target);
+        copy_yes_button.addEventListener ('click', yesClickHandler);
+        copy_no_button.addEventListener ('click', function() {
+            closeModal($target);
+        });
+        (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
+            const $target = $close.closest('.modal');
+            $close.addEventListener('click', () => {
+                closeModal($target);
+            });
+        }); 
+        document.addEventListener('keydown', (event) => {
+            const e = event || window.event;
+        
+            if (e.keyCode === 27) { // Escape key
+                closeAllModals();
+            }
+        });
     });
-});
-document.addEventListener('keydown', (event) => {
-    const e = event || window.event;
 
-    if (e.keyCode === 27) { // Escape key
-        // ****** BUG ****** 
-        closeAllModals();
-    }
-});
+};
 
 // This function handles the 'Draw New Card' button.
 var refresh = function() {
