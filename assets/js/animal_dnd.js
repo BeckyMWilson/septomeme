@@ -1,4 +1,5 @@
 // Variables that target different HTML elements
+// Variables that target different HTML elements
 var theBody = document.querySelector("#the_body");
 var theCharacter = document.querySelector("#character_card");
 var theIMG = document.querySelector("#the_IMG");
@@ -6,9 +7,14 @@ var theTitle = document.querySelector("#the_title");
 var theDescription = document.querySelector("#the_description");
 var theButtons = document.querySelector("#the_buttons");
 
+var yes_button = document.querySelector("#yes_button");
+var no_button = document.querySelector("#no_button");
+
 var galleryArray = [];
 var galleryArrayData = localStorage.getItem("Images");
 var imageHist = JSON.parse(galleryArrayData);
+
+var $target;  //<----moved this here to store the currently focused modal
 
 // Random number generator.
 // 'max' parameter accepts any value passed by the user.
@@ -174,6 +180,21 @@ var dnd = function() {
     };
 };
 
+// Global functions used to handle the Modal functionality
+function openModal($el) {
+    $el.classList.add('is-active');
+}
+
+function closeModal($el) {
+    $el.classList.remove('is-active');
+}
+
+function closeAllModals() {
+    (document.querySelectorAll('.modal') || []).forEach(($modal) => {
+        closeModal($modal);
+    });
+}
+
 // The following gallery() function aggregates the picture, ability title, and ability description into a variable
 // called store_card. The store_card variable then pushes the recently stored card into an array. 
 var gallery = function() {
@@ -187,63 +208,59 @@ var gallery = function() {
     var store_picture = theIMG.innerHTML;
     var store_title = theTitle.innerHTML;
     var store_description = theDescription.innerHTML
-    var store_card = {picture: store_picture, title: store_title, description: store_description};
-    
-    function openModal($el) {
-        $el.classList.add('is-active');
-    }
-
-    function closeModal($el) {
-        $el.classList.remove('is-active');
-    }
-
-    function closeAllModals() {
-        (document.querySelectorAll('.modal') || []).forEach(($modal) => {
-            closeModal($modal);
-        });
-    }
-    (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
-        const modal = $trigger.dataset.target;
-        const $target = document.getElementById(modal);
-        openModal($target);
-
-        var yes_button = document.querySelector("#yes_button");
-        var no_button = document.querySelector("#no_button");
-        
-        yes_button.addEventListener ('click', function() {
-            galleryArray.push(store_card);
-            for (var i = 0; i < galleryArray.length; i++) {
-                if (galleryArray.length > 7) {
-                        console.log("!!!");
-                        galleryArray.shift();
-                }
-        }
-            var uniqueGalleryArray = [...new Set(galleryArray)];  // this solves a bug caused by forEach where entries multiple based on the amount of times 'yes' is selected
-            localStorage.setItem("Images", JSON.stringify(uniqueGalleryArray));
-            whichAnimal();
-            closeModal($target);
-        });
-        no_button.addEventListener ('click', function() {
-            // ****** BUG ****** 
-            closeModal($target);
-        });
-    });
-    (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
-        const $target = $close.closest('.modal');
-        // ****** BUG ****** 
-        $close.addEventListener('click', () => {
-            closeModal($target);
-        });
-    });
-    document.addEventListener('keydown', (event) => {
-        const e = event || window.event;
-    
-        if (e.keyCode === 27) { // Escape key
-            // ****** BUG ****** 
-            closeAllModals();
-        }
-    });
+    store_card = {picture: store_picture, title: store_title, description: store_description};
 }
+
+// Handle the event listener for a dynamically created modal 
+// Keeping this outside the gallery() function prevents the event listeners from stacking
+document.body.addEventListener('click', function(e){
+    if (e.target.classList.contains('js-modal-trigger')) {
+        var $trigger = e.target;
+        const modal = $trigger.dataset.target;
+        $target = document.getElementById(modal);
+        openModal($target);
+    }
+})
+
+// When the user selects 'Yes' on the modal, push the store_card into galleryArray
+// and set to local storage
+var handleModalClickYes = function() {
+    galleryArray.push(store_card);
+    for (var i = 0; i < galleryArray.length; i++) {
+        if (galleryArray.length > 7) {
+                galleryArray.shift();
+        }
+    }
+    var uniqueGalleryArray = [...new Set(galleryArray)];  // this solves a bug caused by forEach where entries multiple based on the amount of times 'yes' is selected
+    localStorage.setItem("Images", JSON.stringify(uniqueGalleryArray));
+    whichAnimal();
+    closeModal($target);
+}
+
+// Looks for the Yes/No query selectors and dictates the function to use based
+// on the user selection
+yes_button.addEventListener ('click', handleModalClickYes);
+no_button.addEventListener ('click', function() {
+    // ****** BUG ****** 
+    closeModal($target);
+});
+
+
+(document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
+    const $target = $close.closest('.modal');
+    // ****** BUG ****** 
+    $close.addEventListener('click', () => {
+        closeModal($target);
+    });
+});
+document.addEventListener('keydown', (event) => {
+    const e = event || window.event;
+
+    if (e.keyCode === 27) { // Escape key
+        // ****** BUG ****** 
+        closeAllModals();
+    }
+});
 
 // This function handles the 'Draw New Card' button.
 var refresh = function() {
@@ -264,5 +281,5 @@ var save = function() {
 
 refresh();
 save();
-whichAnimal();
+whichAnimal();            
 
